@@ -7,7 +7,7 @@ function App() {
   async function request() {
     const resp = await fetch(
       "https://xaxvdrpuiorpxot7thfp2dx7s40tpgnj.lambda-url.ap-northeast-1.on.aws/",
-      { credentials: "omit" },
+      { credentials: "include" },
     );
 
     setStatus(resp.status);
