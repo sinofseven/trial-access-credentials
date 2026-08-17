@@ -28,10 +28,7 @@ function App() {
   }
 
   async function getIdentity() {
-    const resp = await fetch(
-      "https://luciferous.cloudflareaccess.com/cdn-cgi/access/get-identity",
-      { credentials: "include" },
-    );
+    const resp = await fetch("/cdn-cgi/access/get-identity", { credentials: "include" });
 
     const data = await resp.json();
     setIdentity(JSON.stringify(data, null, 2));
