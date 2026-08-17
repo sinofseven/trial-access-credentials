@@ -4,6 +4,7 @@ function App() {
   const [response, setResponse] = useState<string>("");
   const [status, setStatus] = useState<null | number>(null);
   const [cookie, setCookie] = useState("");
+  const [identity, setIdentity] = useState("");
 
   async function request() {
     const resp = await fetch(
@@ -24,6 +25,16 @@ function App() {
   function getCookie() {
     const data = document.cookie;
     setCookie(data);
+  }
+
+  async function getIdentity() {
+    const resp = await fetch(
+      "https://luciferous.cloudflareaccess.com/cdn-cgi/access/get-identity",
+      { credentials: "include" },
+    );
+
+    const data = await resp.json();
+    setIdentity(JSON.stringify(data, null, 2));
   }
 
   return (
@@ -47,6 +58,14 @@ function App() {
         <button onClick={() => setCookie("")}>clear</button>
       </p>
       <pre>{cookie}</pre>
+      <hr />
+      <p>
+        <button onClick={getIdentity}>get identity</button>
+      </p>
+      <p>
+        <button onClick={() => setIdentity("")}>clear</button>
+      </p>
+      <pre>{identity}</pre>
     </>
   );
 }
