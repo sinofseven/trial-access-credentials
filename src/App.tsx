@@ -3,6 +3,7 @@ import { useState } from "react";
 function App() {
   const [response, setResponse] = useState<string>("");
   const [status, setStatus] = useState<null | number>(null);
+  const [cookie, setCookie] = useState("");
 
   async function request() {
     const resp = await fetch(
@@ -20,6 +21,11 @@ function App() {
     setStatus(null);
   }
 
+  function getCookie() {
+    const data = document.cookie;
+    setCookie(data);
+  }
+
   return (
     <>
       <h1>Trial Access Credentials</h1>
@@ -33,6 +39,14 @@ function App() {
       <hr />
       <p>status: {status}</p>
       <textarea readOnly value={response} />
+      <hr />
+      <p>
+        <button onClick={getCookie}>get cookie</button>
+      </p>
+      <p>
+        <button onClick={() => setCookie("")}>clear</button>
+      </p>
+      <pre>{cookie}</pre>
     </>
   );
 }
